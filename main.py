@@ -3,6 +3,7 @@
 import logging
 from gestion import Gestion
 from menu import Menu
+import faker
 import os
 
 

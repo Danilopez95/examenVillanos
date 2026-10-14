@@ -69,7 +69,7 @@ class Menu:
                             self.listar_plantilla()
 
                         elif opcion == "3":
-                            print("Crear plantilla")
+                            self.gestion.generar_plantilla()
 
                         elif opcion == "4":
                             return
