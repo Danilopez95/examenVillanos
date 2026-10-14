@@ -3,7 +3,10 @@
 from datetime import date
 import logging
 import random
+import faker
 from typing import Dict, Optional, Type
+
+from faker import Faker
 
 from models import Heroe, Personaje, Villano, Miembro, Jugador, CuerpoTecnico
 logger = logging.getLogger(__name__)
@@ -16,9 +19,9 @@ class Gestion:
         self.heroes: Dict[int, Heroe] = {}
         self.villanos: Dict[int, Villano] = {}
         self._siguiente_id = 1
-
         self.plantilla = {}
         self._siguiente_id_miembro = 1
+        self.fake = Faker("es_ES")
 
     def agregar_miembro(self,tipo,nombre,apellido,dato):
         identificador = self._siguiente_id_miembro
@@ -47,6 +50,40 @@ class Gestion:
         except Exception:
             logger.exception("Error al listar la plantilla.")
             raise
+
+    def generar_plantilla(self):
+        if self.plantilla:
+            print("La plantilla ya contiene miembros.")
+            return
+
+        posiciones = {
+            "Portero": 2,
+            "Defensa": 8,
+            "Centrocampista": 8,
+            "Delantero": 5
+        }
+
+        roles = {
+            "Entrenador": 1,
+            "Utillero": 4
+        }
+
+        for posicion, cantidad in posiciones.items():
+            for i in range(cantidad):
+                nombre = self.fake.first_name()
+                apellidos = self.fake.last_name() + " " + self.fake.last_name()
+
+                self.agregar_miembro("jugador", nombre, apellidos, posicion)
+
+        for rol, cantidad in roles.items():
+            for i in range(cantidad):
+                nombre = self.fake.first_name()
+                apellidos = self.fake.last_name() + " " + self.fake.last_name()
+
+                self.agregar_miembro("tecnico", nombre, apellidos, rol)
+
+        logger.info("Plantilla generada automáticamente con 28 miembros.")
+        print("Plantilla generada correctamente con 28 miembros.")
 
 
     def _obtener_diccionario(self, tipo: str):
