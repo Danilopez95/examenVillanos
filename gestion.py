@@ -35,6 +35,19 @@ class Gestion:
         logger.info("Agregado %s id=%s nombre=%s %s", tipo, identificador, nombre, apellido)
         return miembro
 
+    def listar_plantilla(self):
+        try:
+            miembros = list(self.plantilla.values())
+            logger.info(
+                "Listado de plantilla solicitado. Cantidad=%s",
+                len(miembros)
+            )
+            return miembros
+
+        except Exception:
+            logger.exception("Error al listar la plantilla.")
+            raise
+
 
     def _obtener_diccionario(self, tipo: str):
         tipo = tipo.strip().lower()

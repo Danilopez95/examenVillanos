@@ -6,7 +6,6 @@ from menu import Menu
 import os
 
 
-
 def configurar_logging() -> None:
     # Crear la carpeta logs si no existe
     os.makedirs("logs", exist_ok=True)
