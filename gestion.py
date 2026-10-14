@@ -5,8 +5,7 @@ import logging
 import random
 from typing import Dict, Optional, Type
 
-from models import Heroe, Personaje, Villano
-
+from models import Heroe, Personaje, Villano, Miembro, Jugador, CuerpoTecnico
 logger = logging.getLogger(__name__)
 
 
@@ -17,6 +16,25 @@ class Gestion:
         self.heroes: Dict[int, Heroe] = {}
         self.villanos: Dict[int, Villano] = {}
         self._siguiente_id = 1
+
+        self.plantilla = {}
+        self._siguiente_id_miembro = 1
+
+    def agregar_miembro(self,tipo,nombre,apellido,dato):
+        identificador = self._siguiente_id_miembro
+        if tipo.lower() == "jugador":
+            miembro = Jugador(identificador, nombre, apellido, dato)
+        elif tipo.lower() == "tecnico":
+            miembro = CuerpoTecnico(identificador, nombre, apellido, dato)
+        else:
+            raise ValueError("Tipo de miembro no válido. Usa 'jugador' o 'tecnico'.")
+
+        self.plantilla[identificador] = miembro
+        self._siguiente_id_miembro += 1
+
+        logger.info("Agregado %s id=%s nombre=%s %s", tipo, identificador, nombre, apellido)
+        return miembro
+
 
     def _obtener_diccionario(self, tipo: str):
         tipo = tipo.strip().lower()
@@ -169,3 +187,4 @@ class Gestion:
         except Exception:
             logger.exception("Error al eliminar personaje.")
             raise
+

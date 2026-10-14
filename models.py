@@ -112,3 +112,21 @@ class Villano(Personaje):
             "ausencias",
             "hablador",
         )
+
+class Miembro:
+    def __init__(self, identificador, nombre, apellidos):
+        self.identificador = identificador
+        self.nombre = nombre
+        self.apellidos = apellidos
+
+
+class Jugador(Miembro):
+    def __init__(self, identificador, nombre, apellidos, posicion):
+        super().__init__(identificador, nombre, apellidos)
+        self.posicion = posicion
+
+
+class CuerpoTecnico(Miembro):
+    def __init__(self, identificador, nombre, apellidos, rol):
+        super().__init__(identificador, nombre, apellidos)
+        self.rol = rol
