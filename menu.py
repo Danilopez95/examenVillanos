@@ -10,6 +10,34 @@ class Menu:
     def __init__(self, gestion: Gestion):
         self.gestion = gestion
 
+    def agregar_miembro(self):
+        print("\n=== AGREGAR MIEMBRO ===")
+        print("1. Jugador")
+        print("2. Cuerpo técnico")
+
+        opcion = input("¿Qué tipo de miembro quieres agregar?: ")
+
+        if opcion == "1":
+            tipo = "jugador"
+            dato = "Posición"
+
+        elif opcion == "2":
+            tipo = "tecnico"
+            dato = "Rol"
+
+        else:
+            print("Opción no válida.")
+            return
+
+        nombre = input("Nombre: ")
+        apellidos = input("Apellidos: ")
+        valor = input(f"{dato}: ")
+
+        miembro = self.gestion.agregar_miembro(tipo, nombre, apellidos, valor)
+
+        print(f"Miembro agregado correctamente con ID: {miembro.identificador}")
+
+
     def mostrar(self) -> None:
         while True:
             print("\n=== MENÚ PRINCIPAL ===")
@@ -33,7 +61,7 @@ class Menu:
                         opcion = input("Elige una opción: ")
 
                         if opcion == "1":
-                            print("Agregar miembro")
+                            self.agregar_miembro()
 
                         elif opcion == "2":
                             print("Listar plantilla")
