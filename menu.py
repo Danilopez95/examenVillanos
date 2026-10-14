@@ -11,8 +11,54 @@ class Menu:
         self.gestion = gestion
 
     def mostrar(self) -> None:
-        """Muestra el menú principal y procesa las opciones."""
         while True:
+            print("\n=== MENÚ PRINCIPAL ===")
+            print("1. Héroes y Villanos")
+            print("2. Plantillas de Fútbol")
+            print("0. Salir")
+
+            opcion = input("Elige una opción: ")
+
+            if opcion == "1":
+                self.mostrar_menu_heroes()
+
+            elif opcion == "2":
+                while True:
+                        print("\n=== PLANTILLAS DE FÚTBOL ===")
+                        print("1. Agregar miembro")
+                        print("2. Listar plantilla")
+                        print("3. Crear plantilla")
+                        print("4. Salir")
+
+                        opcion = input("Elige una opción: ")
+
+                        if opcion == "1":
+                            print("Agregar miembro")
+
+                        elif opcion == "2":
+                            print("Listar plantilla")
+
+                        elif opcion == "3":
+                            print("Crear plantilla")
+
+                        elif opcion == "4":
+                            return
+
+                        else:
+                            print("Opción no válida.")
+
+
+            elif opcion == "0":
+                print("Hasta luego.")
+                return
+
+            else:
+                print("Opción no válida.")
+
+    def mostrar_menu_heroes(self) -> None:
+
+        while True:
+
             print("\n=== HÉROES Y VILLANOS DEL VIRGEN ===")
             print("1. Crear héroe")
             print("2. Crear villano")
@@ -98,3 +144,4 @@ class Menu:
             print("Personaje eliminado.")
         else:
             print("No existe un personaje con ese identificador.")
+
